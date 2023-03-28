@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header class="d-flex justify-content-center align-items-center flex-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Harry_Potter_wordmark.svg" alt="">
+        </header>
+        <main>
+            <div class="container text-white p-3">
+                <!-- Favoritos -->
+                <h2 v-if="favoritos.length" class="text-center text-white">Favoritos</h2>
+                <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 text-black">
+                    <div v-for="personaje of favoritos" class="card" style="width: 18rem;">
+                        <img :src="personaje.image || 'https://static.vecteezy.com/system/resources/thumbnails/012/782/661/small/symbol-from-the-book-about-harry-potter-glasses-and-lightning-illustration-free-vector.jpg'"
+                            class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{personaje.name}}</h5>
+                            <p class="card-text">Casa: {{personaje.house || 'De la calle'}}</p>
+                            <button @click="eliminarFavorito(personaje)" class="btn btn-primary fav">❤️‍🩹</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-center text-white">Personajes</h2>
+
+            <div class="container my-3">
+                <!-- Input -->
+                <input type="text" v-model="texto" class="form-control" placeholder="Harry Potter">
+                <!-- {{filtrarPorTexto}}
+                {{filtrarPorCasa}} -->
+                {{filtroDoble}}
+                <!-- Checks -->
+                <div class="mt-3 d-flex justify-content-center align-items-center flex-wrap gap-3 text-white">
+                    <div v-for="casa of casas" class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" :id="casa" :value="casa" v-model="casasSeleccionadas">
+                        <label class="form-check-label" :for="casa">{{casa}}</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+
+            </div>
+            <!-- Tarjetas -->
+            <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
+                <p v-if="!personajes.length && !cargando" class="display-1 fw-bolder text-danger">No hay coincidencias!</p>
+                <div v-if="cargando" class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                <div v-for="personaje of personajes" class="card" style="width: 18rem;">
+                    <img :src="personaje.image || 'https://static.vecteezy.com/system/resources/thumbnails/012/782/661/small/symbol-from-the-book-about-harry-potter-glasses-and-lightning-illustration-free-vector.jpg'"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{personaje.name}}</h5>
+                        <p class="card-text">Casa: {{personaje.house || 'De la calle'}}</p>
+                        <button @click="agregarFavorito(personaje)" class="btn btn-warning fav">❤️</button>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    </main>
+    <footer class="d-flex justify-content-center align-items-center flex-wrap">
+        <p>HP con vue 2023 &reg;</p>
+    </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
