@@ -64,13 +64,13 @@ const app = createApp({
                 this.personajes = this.backupPersonajes.filter(personaje => this.casasSeleccionadas.includes(personaje.house))
             }
         } */
-        filtroDoble(){
+        /* filtroDoble(){
             let primerFiltro = this.backupPersonajes.filter(personaje => personaje.name.toLowerCase().includes(this.texto.toLowerCase()))
             if(!this.casasSeleccionadas.length){
                 this.personajes = primerFiltro
             } else {
                 this.personajes = primerFiltro.filter(personaje => this.casasSeleccionadas.includes(personaje.house))
             }
-        }
+        } */
     }
 }).mount('#app')
